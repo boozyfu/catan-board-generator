@@ -32,7 +32,6 @@ def generate_board(resource_dict):
     for row_len in row_lengths:
         board.append(tiles[i : i + row_len])
         i += row_len
-    st.write(board)
     return board
 
 @st.cache_data
