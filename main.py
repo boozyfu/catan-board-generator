@@ -28,3 +28,4 @@ with fp:
     if generate_btn:
       board = generate_board(fp_resources)
       board_image = create_composite_image(st.session_state.board_images)
+      st.image(board_image)
