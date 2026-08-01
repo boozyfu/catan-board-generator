@@ -2,7 +2,7 @@ import streamlit as st
 import random
 import glob
 from PIL import Image
-from Backend.board_generator import test
+from Backend.board_generator import fp_resources, tp_resources, generate_board, render_board
 
 fp, tp, exp, help = st.tabs(["4-Person", "2-Person", "Expansion", "Help"])
 
@@ -12,7 +12,7 @@ def load_board_images():
   img_dict = {}
   
   for file in st.session_state["image_files"]:
-    file_base = file.split("/")[-1]
+    file_base = file.split("/")[-1].replace(".png","")
     img_load = Image.open(file).convert("RGBA")
     img_load = img_load.resize((TILE_SIZE, TILE_SIZE))
     img_dict[file_base] = img_load
@@ -32,12 +32,13 @@ if "board_images" not in st.session_state:
 
 
 with fp:
+  st.header("Catan Board Generator - 4 Player")
   game_container = st.container()
   with game_container:
-    st.header("Catan Board Generator - 2 Player")
-    generate_btn = st.button("Generate Board")
+    with st.bottom:
+      generate_btn = st.button("Generate Board")
     if generate_btn:
-      options = st.session_state.img_stem
-      choice = random.choice(options)
-      st.image(st.session_state.board_images[choice])
+      board = generate_board(fp_resources)
+      board_render = render_board(board. st.session_state.board_images)
+      st.image(board_render)
       
