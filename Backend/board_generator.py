@@ -58,7 +58,7 @@ def load_board_images(tile_size=120):
         )
     return images
 
-def create_composite_image(resource_dict, coordinates=CATAN_COORDS, canvas_size=(800, 600)):
+def create_composite_image(resource_dict, coordinates=CATAN_COORDS, canvas_size=(200, 100)):
     """Place images at specified coordinates on a canvas."""
     canvas = Image.new('RGB', canvas_size, color='white')
     board = generate_board(resource_dict)
