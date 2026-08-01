@@ -57,8 +57,26 @@ def display_board(resource_dict):
   board_image_lookup = load_board_images()
   board = generate_board(resource_dict)
   
-  for row in board:
-      cols = st.columns(len(row))
-      for col, resource in zip(cols, row):
-          with col:
-              st.image(board_image_lookup[resource], width=10)
+  tile_size = 40
+  
+  # Calculate canvas size
+  # For hexagonal grids with offset rows
+  max_width = max(len(row) for row in board)
+  canvas_width = max_width * tile_size + tile_size // 2
+  canvas_height = len(board) * tile_size + tile_size // 2
+  
+  # Create blank image
+  board_image = Image.new('RGBA', (canvas_width, canvas_height), (255, 255, 255, 0))
+  
+  # Paste tiles
+  for row_num, row in enumerate(board):
+    for col_num, resource in enumerate(row):
+      # Calculate x position with offset for alternating rows
+      offset_x = (tile_size // 2) if row_num % 2 == 1 else 0
+      x = col_num * tile_size + offset_x + (tile_size // 4)
+      y = row_num * tile_size + (tile_size // 4)
+      
+      tile_img = board_image_lookup[resource]
+      board_image.paste(tile_img, (int(x), int(y)), tile_img)
+  
+  st.image(board_image)
