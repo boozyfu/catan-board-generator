@@ -89,12 +89,7 @@ def create_catan_board(resource_dict, tile_size=150):
         """Resize image and crop into a hex."""
         image = image.convert("RGB")
         image = image.resize((tile_size, tile_size))
-
-        hex_img = Image.new("RGBA", (tile_size, tile_size))
-        mask = hex_mask(tile_size)
-
-        hex_img.paste(image, (0, 0), mask)
-        return hex_img
+        return image
 
     rows = [3, 4, 5, 4, 3]
 
