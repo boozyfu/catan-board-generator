@@ -39,6 +39,6 @@ with fp:
       generate_btn = st.button("Generate Board")
     if generate_btn:
       board = generate_board(fp_resources)
-      board_render = render_board(board. st.session_state.board_images)
+      board_render = render_board(board, st.session_state.board_images)
       st.image(board_render)
       
