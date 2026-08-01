@@ -1,5 +1,5 @@
 import random
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import math
 import streamlit as st
 #initialize
@@ -62,7 +62,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
     """
     tp_numbers = []
     fp_numbers = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12]
-
+    font = ImageFont.truetype("DejaVuSans.ttf", size=40)
     def generate_numbers(game_type):
         num_list_lookup = {"fp": fp_numbers,
                      "tp": tp_numbers}
@@ -81,7 +81,8 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
     hex_list = [img for row in image_board for img in row]
 
     desert_idx = hex_list.index("desert")
-    num_list.insert(desert_idx, None)
+    n
+  um_list.insert(desert_idx, None)
     hexes = [static_images.get(img) for img in hex_list]
     number_tiles = [num_list[idx] for idx, _ in enumerate(hex_list)]
     
@@ -137,7 +138,8 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
             draw.text(
                 (cx - tw/2, cy - th/2),
                 text,
-                fill=color
+                fill=color,
+                font=font
             )
         
             index += 1
