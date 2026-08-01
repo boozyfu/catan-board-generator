@@ -77,7 +77,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
 
     num_list = generate_numbers(game_type)
 
-    hex_list = [img for row in image_board for image in row]
+    hex_list = [img for row in image_board for img in row]
 
     hexes = [static_images.get(img) for img in hex_list]
     number_tiles = [num_list[idx] for idx, label in enumerate(hex_list) 
