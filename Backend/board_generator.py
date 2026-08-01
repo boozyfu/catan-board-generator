@@ -21,19 +21,6 @@ tp_resources = {
   "ore": 2,
   "desert": 1}
 
-def generate_board(resource_dict):
-    tiles = []
-    for resource, count in resource_dict.items():
-        tiles.extend([resource] * count)
-    random.shuffle(tiles)
-
-    board = []
-    i = 0
-    for row_len in ROW_LENGTHS:
-        board.append(tiles[i : i + row_len])
-        i += row_len
-    return board
-
 CATAN_COORDS = [
     (-4,  2), (-4,  0), (-4, -2),
     (-2,  3), (-2,  1), (-2, -1), (-2, -3),
@@ -57,48 +44,35 @@ def load_board_images(tile_size=120):
         )
 
     return images
-  
-def render_board(board, images, tile_size=120):
-    radius = tile_size / 2
 
-    dx = math.sqrt(3) * radius
-    dy = 1.5 * radius
+def generate_board(resource_dict):
+    tiles = []
+    for resource, count in resource_dict.items():
+        tiles.extend([resource] * count)
+    random.shuffle(tiles)
 
-    max_cols = max(len(row) for row in board)
+    board = []
+    i = 0
+    for row_len in ROW_LENGTHS:
+        board.append(tiles[i : i + row_len])
+        i += row_len
+    return board
 
-    margin = tile_size
-
-    canvas_w = int(max_cols * dx + margin * 2)
-    canvas_h = int(len(board) * dy + margin * 2)
-
-    canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 0))
-
-    # tweak these if needed
-    x_offset = 20
-    y_offset = 60
-
-    for r, row in enumerate(board):
-        offset = (max_cols - len(row)) * dx / 2
-
-        for c, resource in enumerate(row):
-            img = images[resource]
-
-            x = int(
-                margin
-                + offset
-                + c * dx
-                - tile_size / 2
-                + x_offset
-            )
-
-            y = int(
-                margin
-                + r * dy
-                - tile_size / 2
-                + y_offset
-            )
-
-            canvas.alpha_composite(img, (x, y))
-
+def create_composite_image(image_list, coordinates, canvas_size=(800, 600)):
+    """
+    Place images at specified coordinates on a canvas.
+    coordinates: list of (x, y) tuples representing center positions
+    """
+    # Create blank canvas
+    canvas = Image.new('RGB', canvas_size, color='white')
+    
+    for img, (x, y) in zip(image_list, coordinates):
+        
+        # Calculate top-left position (center the image at x, y)
+        left = x - img.width // 2
+        top = y - img.height // 2
+        
+        # Paste image on canvas
+        canvas.paste(img, (left, top))
+    
     return canvas
-
