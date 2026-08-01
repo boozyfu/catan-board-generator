@@ -19,7 +19,6 @@ if "board_images" not in st.session_state:
 
 st.write(st.session_state.board_images.keys())
 
-images = load_board_images()
 with fp:
   st.header("Catan Board Generator - 4 Player")
   game_container = st.container()
@@ -27,5 +26,4 @@ with fp:
     with st.bottom:
       generate_btn = st.button("Generate Board")
     if generate_btn:
-      board = generate_board(fp_resources)
-      display_grid(board, images)
+      display_board(fp_resources)
