@@ -4,8 +4,8 @@ import glob
 from PIL import Image
 from Backend.board_generator import fp_resources, tp_resources, generate_board, render_board
 
+tile_size = 120
 fp, tp, exp, help = st.tabs(["4-Person", "2-Person", "Expansion", "Help"])
-TILE_SIZE = 120
 
 @st.cache_data
 def load_board_images():
@@ -15,7 +15,7 @@ def load_board_images():
   for file in st.session_state["image_files"]:
     file_base = file.split("/")[-1].replace(".png","")
     img_load = Image.open(file).convert("RGBA")
-    img_load = img_load.resize((TILE_SIZE, TILE_SIZE))
+    img_load = img_load.resize((tile_size, tile_size))
     
     img_dict[file_base] = img_load
 
@@ -41,6 +41,6 @@ with fp:
       generate_btn = st.button("Generate Board")
     if generate_btn:
       board = generate_board(fp_resources)
-      board_render = render_board(board, st.session_state.board_images, tile_size=TILE_SIZE)
+      board_render = render_board(board, st.session_state.board_images, tile_size=tile_size)
       st.image(board_render)
       
