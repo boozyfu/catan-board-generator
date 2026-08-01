@@ -101,7 +101,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
         (255, 255, 255, 0)
     )
 
-    draw = ImageDraw.draw(board)
+    draw = ImageDraw.Draw(board)
 
     index = 0
 
