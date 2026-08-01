@@ -1,7 +1,7 @@
 import random
 from PIL import Image
 import math
-
+import streamlit as st
 #initialize board
 ROW_LENGTHS = [3, 4, 5, 4, 3]
 
@@ -42,62 +42,46 @@ CATAN_COORDS = [
     ( 4,  2), ( 4,  0), ( 4, -2),
 ]
 
-
-def load_board_images(tile_size):
-    size = tile_size // 2
-    img_w = int(2 * size)
-    img_h = int(2 * size * math.sin(math.pi / 3))
-
+@st.cache_data
+def load_board_images(tile_size=120):
     images = {}
 
     for file in st.session_state["image_files"]:
         name = file.split("/")[-1].replace(".png", "")
-        img = Image.open(file).convert("RGBA")
-        img = img.resize((img_w, img_h), Image.Resampling.LANCZOS)
-        images[name] = img
+
+        images[name] = (
+            Image.open(file)
+            .convert("RGBA")
+            .resize((tile_size, tile_size))
+            .rotate(30, expand=True)
+        )
 
     return images
 
+def render_board(board, images, tile_size=120):
+    radius = tile_size / 2
 
-def render_board(resources, images, tile_size=120):
-    size = tile_size / 2
+    dx = math.sqrt(3) * radius
+    dy = 1.5 * radius
 
-    dx = size * (1 + math.cos(math.pi / 3))
-    dy = size * math.sin(math.pi / 3)
-
-    img_w = int(2 * size)
-    img_h = int(2 * dy)
-
-    xs = [c[0] for c in CATAN_COORDS]
-    ys = [c[1] for c in CATAN_COORDS]
+    max_cols = max(len(r) for r in board)
 
     margin = tile_size
 
-    canvas_w = int((max(xs) - min(xs)) * dx + img_w + 2 * margin)
-    canvas_h = int((max(ys) - min(ys)) * dy + img_h + 2 * margin)
+    canvas_w = int(max_cols * dx + margin * 2)
+    canvas_h = int(len(board) * dy + margin * 2)
 
     canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 0))
 
-    center_x = canvas_w / 2
-    center_y = canvas_h / 2
+    for r, row in enumerate(board):
+        offset = (max_cols - len(row)) * dx / 2
 
-    for resource, (gx, gy) in zip(resources, CATAN_COORDS):
-        if resource not in images:
-            continue
+        for c, resource in enumerate(row):
+            img = images[resource]
 
-        img = images[resource]
+            x = int(margin + offset + c * dx - img.width / 2)
+            y = int(margin + r * dy - img.height / 2)
 
-        cx = center_x + gx * dx
-        cy = center_y + gy * dy
-
-        canvas.paste(
-            img,
-            (
-                int(cx - size),
-                int(cy - dy),
-            ),
-            img,
-        )
+            canvas.alpha_composite(img, (x, y))
 
     return canvas
-
