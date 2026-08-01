@@ -73,6 +73,10 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
     Returns:
         PIL.Image.Image containing the assembled board
     """
+    tp_numbers = []
+    fp_numbers = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12]
+
+  
     static_images = load_board_images()
 
     image_board = generate_board(resource_dict)
