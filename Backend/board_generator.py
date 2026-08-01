@@ -59,7 +59,7 @@ def load_board_images(tile_size=120):
     return images
   
 def render_board(board, images, tile_size=120):
-   radius = tile_size / 2
+    radius = tile_size / 2
 
     dx = math.sqrt(3) * radius
     dy = 1.5 * radius
