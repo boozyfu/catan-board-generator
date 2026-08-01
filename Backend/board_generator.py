@@ -29,6 +29,7 @@ def generate_numbers(game_type):
   num_list = num_list_lookup.get(game_type)
   
   shuffle = random.shuffle(num_list)
+  st.write(shuffle)
 
   return shuffle
 
