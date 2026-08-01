@@ -31,7 +31,7 @@ def generate_board(resource_dict):
         board.append(tiles[i : i + row_len])
         i += row_len
     return board
-
+"""
 def render_board(board, images, TILE_SIZE=120):
     hex_w = TILE_SIZE
     hex_h = int(TILE_SIZE * 0.8)
@@ -48,4 +48,34 @@ def render_board(board, images, TILE_SIZE=120):
             x = int(row_offset + col_idx * hex_w * 0.75)
             canvas.paste(images[resource], (x, y), images[resource])
 
+    return canvas
+"""
+def render_board(board, images, tile_size=TILE_SIZE):
+    """Render the Catan board with hex tiles"""
+    hex_w = tile_size
+    hex_h = int(tile_size * 0.87)
+    
+    row_lengths = [len(row) for row in board]
+    max_row_len = max(row_lengths)
+    
+    # Calculate canvas size
+    canvas_w = int(hex_w * 0.75 * max_row_len + hex_w * 0.5)
+    canvas_h = int(hex_h * len(row_lengths) + hex_h)
+    canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 0))
+    
+    for row_idx, row in enumerate(board):
+        # Center rows of different lengths
+        row_offset = (max_row_len - len(row)) * (hex_w * 0.375)
+        y = int(row_idx * hex_h * 0.85)
+        
+        for col_idx, resource in enumerate(row):
+            x = int(row_offset + col_idx * hex_w * 0.75)
+            
+            if resource in images:
+                img = images[resource]
+                # Center the rotated image within grid position
+                offset_x = x - (img.width - tile_size) // 2
+                offset_y = y - (img.height - tile_size) // 2
+                canvas.paste(img, (offset_x, offset_y), img)
+    
     return canvas
