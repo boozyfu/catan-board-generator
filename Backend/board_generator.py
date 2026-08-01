@@ -56,11 +56,9 @@ if "board_images" not in st.session_state:
 def display_board(resource_dict):
   board_image_lookup = load_board_images()
   board = generate_board(resource_dict)
-  image_idx = 0
-  for row_num, num_cols in enumerate(row_lengths):
-      cols = st.columns(num_cols)
-      for col in cols:
+  
+  for row in board:
+      cols = st.columns(len(row))
+      for col, resource in zip(cols, row):
           with col:
-            for img in board[image_idx]:
-              st.image(board_image_lookup[img], use_container_width=True)
-          image_idx += 1
+              st.image(board_image_lookup[resource], width=80)
