@@ -34,37 +34,42 @@ def generate_board(resource_dict):
         i += row_len
     return board
 
-def get_hex_spacing(size):
-    """Calculate hex grid spacing using proper hexagonal math"""
-    dx = size * (1 + math.cos(math.pi / 3)) / 2  # ≈ 0.75 * size
-    dy = size * math.sin(math.pi / 3)              # ≈ 0.866 * size
-    return dx, dy
-
 def render_board(board, images, tile_size=120):
-    """Render the Catan board with proper hexagonal grid math"""
-    dx, dy = get_hex_spacing(tile_size)
-    
+    radius = tile_size / 2
+
+    # Pointy-top hex spacing
+    dx = math.sqrt(3) * radius
+    dy = 1.5 * radius
+
     row_lengths = [len(row) for row in board]
     max_row_len = max(row_lengths)
-    
-    # Calculate canvas size using hex formulas
-    canvas_w = int((max_row_len * dx) + (2 * tile_size))
-    canvas_h = int((len(board) + 2) * dy)
+
+    margin = tile_size
+
+    canvas_w = int(max_row_len * dx + 2 * margin)
+    canvas_h = int((len(board) - 1) * dy + 2 * margin + tile_size)
+
     canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 0))
-    
+
     for row_idx, row in enumerate(board):
-        # Center rows of different lengths
         row_offset = (max_row_len - len(row)) * dx / 2
-        y = int(row_idx * dy + tile_size)
-        
+
         for col_idx, resource in enumerate(row):
-            x = int(row_offset + col_idx * dx + tile_size)
-            
-            if resource in images:
-                img = images[resource]
-                # Center the rotated image within grid position
-                offset_x = x - img.width // 2
-                offset_y = y - img.height // 2
-                canvas.paste(img, (offset_x, offset_y), img)
-    
+            if resource not in images:
+                continue
+
+            img = images[resource]
+
+            cx = margin + row_offset + col_idx * dx
+            cy = margin + row_idx * dy
+
+            canvas.paste(
+                img,
+                (
+                    int(cx - img.width / 2),
+                    int(cy - img.height / 2),
+                ),
+                img,
+            )
+
     return canvas
