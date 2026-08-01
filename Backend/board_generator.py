@@ -61,4 +61,4 @@ def display_board(resource_dict):
       cols = st.columns(len(row))
       for col, resource in zip(cols, row):
           with col:
-              st.image(board_image_lookup[resource], width=80)
+              st.image(board_image_lookup[resource], width=10)
