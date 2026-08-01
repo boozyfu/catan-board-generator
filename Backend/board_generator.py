@@ -75,7 +75,7 @@ def render_board(board, images, tile_size=120):
 
     # tweak these if needed
     x_offset = 20
-    y_offset = 8
+    y_offset = 60
 
     for r, row in enumerate(board):
         offset = (max_cols - len(row)) * dx / 2
