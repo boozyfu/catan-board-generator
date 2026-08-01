@@ -58,7 +58,7 @@ def display_board(resource_dict):
   image_idx = 0
   for row_num, num_cols in enumerate(row_lengths):
       cols = st.columns(num_cols)
-      for tile in board:
+      for col in cols:
           with col:
-              st.image(board_image_lookup[tile], use_container_width=True)
+              st.image(board_image_lookup[board[image_idx], use_container_width=True)
           image_idx += 1
