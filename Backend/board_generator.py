@@ -20,16 +20,6 @@ tp_resources = {
   "ore": 2,
   "desert": 1}
 
-def generate_numbers(game_type):
-  num_list_lookup = {"fp": fp_numbers,
-                     "tp": tp_numbers}
-  st.write(game_type)
-  num_list = num_list_lookup[game_type]
-  
-  random.shuffle(num_list)
-  st.write(num_list)
-
-  return num_list
 
 def generate_board(resource_dict):
     tiles = []
@@ -73,6 +63,16 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
     tp_numbers = []
     fp_numbers = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12]
 
+    def generate_numbers(game_type):
+      num_list_lookup = {"fp": fp_numbers,
+                     "tp": tp_numbers}
+      st.write(game_type)
+      num_list = num_list_lookup[game_type]
+  
+      random.shuffle(num_list)
+      st.write(num_list)
+
+      return num_list
   
     static_images = load_board_images()
 
