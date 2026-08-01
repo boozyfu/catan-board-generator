@@ -14,8 +14,6 @@ if "image_files" not in st.session_state:
 if "img_stem" not in st.session_state:
   st.session_state.img_stem = [f.split("/")[-1] for f in st.session_state.image_files]
 
-st.write(st.session_state.board_images.keys())
-
 with fp:
   st.header("Catan Board Generator - 4 Player")
   game_container = st.container()
