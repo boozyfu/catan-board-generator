@@ -2,7 +2,7 @@ import streamlit as st
 import random
 import glob
 from PIL import Image
-from Backend.board_generator import fp_resources, tp_resources, load_board_images, generate_board, render_board
+from Backend.board_generator import fp_resources, tp_resources, load_board_images, generate_board, create_composite_image
 
 tile_size = 120
 fp, tp, exp, help = st.tabs(["4-Person", "2-Person", "Expansion", "Help"])
@@ -27,7 +27,4 @@ with fp:
       generate_btn = st.button("Generate Board")
     if generate_btn:
       board = generate_board(fp_resources)
-      board_image = render_board(board,
-                                 st.session_state.board_images,
-                                 tile_size=120)
-      st.image(board_image)
+      board_image = create_composite_image(st.session_state.board_images)
