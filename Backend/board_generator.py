@@ -29,10 +29,10 @@ def generate_numbers(game_type):
   st.write(game_type)
   num_list = num_list_lookup[game_type]
   
-  shuffle = random.shuffle(num_list)
-  st.write(shuffle)
+  random.shuffle(num_list)
+  st.write(num_list)
 
-  return shuffle
+  return num_list
 
 def generate_board(resource_dict):
     tiles = []
