@@ -34,7 +34,7 @@ def generate_board(resource_dict):
 
 def render_board(board, images, TILE_SIZE=120):
     hex_w = TILE_SIZE
-    hex_h = int(TILE_SIZE * 0.87)
+    hex_h = int(TILE_SIZE * 0.8)
     max_row_len = max(ROW_LENGTHS)
 
     canvas_w = int(hex_w * 0.75 * max_row_len + hex_w * 0.5)
