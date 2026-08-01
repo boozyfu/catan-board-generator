@@ -26,7 +26,8 @@ tp_resources = {
 def generate_numbers(game_type):
   num_list_lookup = {"fp": fp_numbers,
                      "tp": tp_numbers}
-  num_list = num_list_lookup.get(game_type)
+  st.write(game_type)
+  num_list = num_list_lookup[game_type]
   
   shuffle = random.shuffle(num_list)
   st.write(shuffle)
