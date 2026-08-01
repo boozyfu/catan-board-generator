@@ -39,8 +39,7 @@ def generate_board(resource_dict):
 def load_board_images(tile_size=120):
     images = {}
     # Convert list to tuple for hashability
-    image_files = tuple(st.session_state.get("image_files", []))
-    
+    image_files = st.session_state["image_files"]
     for file in image_files:
         name = file.split("/")[-1].replace(".png", "")
         images[name] = (
