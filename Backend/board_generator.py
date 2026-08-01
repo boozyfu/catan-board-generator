@@ -6,7 +6,7 @@ ROW_LENGTHS = [3, 4, 5, 4, 3]
 fp_resources = {
   "wood": 4,
   "clay": 3,
-  "sheep": 4,
+  "wool": 4,
   "grain": 4,
   "ore": 3,
   "desert": 1}
@@ -14,7 +14,7 @@ fp_resources = {
 tp_resources = {
   "wood": 3,
   "clay": 2,
-  "sheep": 3,
+  "wool": 3,
   "grain": 3,
   "ore": 2,
   "desert": 1}
