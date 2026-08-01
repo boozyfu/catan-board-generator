@@ -32,7 +32,7 @@ def generate_board(resource_dict):
         i += row_len
     return board
 
-def render_board(board, images, TILE_SIZE=120):
+"""def render_board(board, images, TILE_SIZE=120):
     hex_w = TILE_SIZE
     hex_h = int(TILE_SIZE * 0.87)
     max_row_len = max(ROW_LENGTHS)
@@ -44,6 +44,33 @@ def render_board(board, images, TILE_SIZE=120):
     for row_idx, row in enumerate(board):
         row_offset = (max_row_len - len(row)) * (hex_w * 0.375)
         y = int(row_idx * hex_h * 0.85)
+        for col_idx, resource in enumerate(row):
+            x = int(row_offset + col_idx * hex_w * 0.75)
+            canvas.paste(images[resource], (x, y), images[resource])
+
+    return canvas"""
+def render_board(board, images, TILE_SIZE=120):
+    hex_w = TILE_SIZE
+    hex_h = int(TILE_SIZE * 0.87)
+    max_row_len = max(ROW_LENGTHS)
+
+    # For flat-topped hexes, vertical spacing is ~75% of height
+    row_height = int(hex_h * 0.75)
+    
+    canvas_w = int(hex_w * 0.75 * max_row_len + hex_w * 0.5)
+    canvas_h = int(row_height * len(ROW_LENGTHS) + hex_h)
+    canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 0))
+
+    for row_idx, row in enumerate(board):
+        # Center the row
+        row_offset = (max_row_len - len(row)) * (hex_w * 0.375)
+        
+        # Alternate rows are offset horizontally by half a tile width
+        if row_idx % 2 == 1:
+            row_offset -= hex_w * 0.375
+        
+        y = int(row_idx * row_height)
+        
         for col_idx, resource in enumerate(row):
             x = int(row_offset + col_idx * hex_w * 0.75)
             canvas.paste(images[resource], (x, y), images[resource])
