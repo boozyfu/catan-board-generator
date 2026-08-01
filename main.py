@@ -27,5 +27,5 @@ with fp:
     with st.bottom:
       generate_btn = st.button("Generate Board")
     if generate_btn:
-      board = generate_board(resource_dict)
+      board = generate_board(fp_resources)
       display_grid(board, images)
