@@ -63,11 +63,11 @@ def create_catan_board(resource_dict, tile_size=150):
     Returns:
         PIL.Image.Image containing the assembled board
     """
-  static_images = load_board_images()
+    static_images = load_board_images()
 
-  image_board = generate_board(resource_dict)
+    image_board = generate_board(resource_dict)
 
-  images = [static_images.get(img) for row in image_board for img in row]
+    images = [static_images.get(img) for row in image_board for img in row]
 
     def hex_mask(size):
         """Create a flat-top hexagon mask."""
