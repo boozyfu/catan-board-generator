@@ -71,7 +71,7 @@ def create_catan_board(resource_dict, tile_size=150):
 
     # spacing for flat-top hexes
     dx = tile_size * 0.75
-    dy = tile_size * 0.75
+    dy = tile_size * 0.86
 
     board_width = int(dx * 5 + tile_size)
     board_height = int(dy * 5 + tile_size)
@@ -84,13 +84,13 @@ def create_catan_board(resource_dict, tile_size=150):
 
     index = 0
 
-    for row, count in enumerate(rows):
+    for col, count in enumerate(rows):
         # center shorter rows
-        y_offset = (5 - count) * dy / 2
+        y_offset = abs(2-col) * dy / 2
 
         for col in range(count):
-            y = int(col * dx)
-            x = int(y_offset + row * dy)
+            x = int(col * dx)
+            y = int(row * dy + y_offset)
 
             board.alpha_composite(
                 hexes[index],
