@@ -31,7 +31,7 @@ def generate_board(resource_dict):
         i += row_len
     return board
 
-def render_board(board, images):
+def render_board(board, images, TILE_SIZE=120:
     hex_w = TILE_SIZE
     hex_h = int(TILE_SIZE * 0.87)
     max_row_len = max(ROW_LENGTHS)
