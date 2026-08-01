@@ -4,9 +4,6 @@ import math
 import streamlit as st
 #initialize
 row_lengths = [3, 4, 5, 4, 3]
-tp_numbers = []
-fp_numbers = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12]
-
 fp_resources = {
   "wood": 4,
   "clay": 3,
