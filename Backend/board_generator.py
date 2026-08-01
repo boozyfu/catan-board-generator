@@ -21,13 +21,7 @@ tp_resources = {
   "ore": 2,
   "desert": 1}
 
-CATAN_COORDS = [
-    (-4,  2), (-4,  0), (-4, -2),
-    (-2,  3), (-2,  1), (-2, -1), (-2, -3),
-    ( 0,  4), ( 0,  2), ( 0,  0), ( 0, -2), ( 0, -4),
-    ( 2,  3), ( 2,  1), ( 2, -1), ( 2, -3),
-    ( 4,  2), ( 4,  0), ( 4, -2),
-]
+
 
 def generate_board(resource_dict):
     tiles = []
@@ -57,23 +51,14 @@ def load_board_images(tile_size=40):
             .rotate(30, expand=False)
         )
     return images
-
-def display_grid(board, images):
-    max_cols = max(row_lengths)
-
-    for row, row_len in zip(board, row_lengths):
-        # calculate padding needed on each side
-        padding = (max_cols - row_len) // 2
-
-        # create full row with empty spaces
-        cols = st.columns([1] * max_cols)
-
-        start = padding
-        end = padding + row_len
-
-        for i, resource in enumerate(row):
-            with cols[start + i]:
-                st.image(
-                    images[resource],
-                    use_container_width=False
-                )
+  
+def display_board(resource_dict):
+  board_image_lookup = load_board_images()
+  board = generate_board(resource_dict)
+  image_idx = 0
+  for row_num, num_cols in enumerate(row_lengths):
+      cols = st.columns(num_cols)
+      for tile in board:
+          with col:
+              st.image(board_image_lookup[tile], use_container_width=True)
+          image_idx += 1
