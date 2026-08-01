@@ -16,7 +16,7 @@ def load_board_images():
     file_base = file.split("/")[-1].replace(".png","")
     img_load = Image.open(file).convert("RGBA")
     img_load = img_load.resize((tile_size, tile_size))
-    img_load = img_load.rotate(60, expand=True)
+    img_load = img_load.rotate(30, expand=True)
     
     img_dict[file_base] = img_load
 
