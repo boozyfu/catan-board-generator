@@ -138,8 +138,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
             draw.text(
                 (cx - tw/2, cy - th/2),
                 text,
-                fill=color,
-                font=font,
+                fill=color
             )
         
             index += 1
