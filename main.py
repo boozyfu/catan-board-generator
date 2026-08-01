@@ -2,6 +2,7 @@ import streamlit as st
 import random
 import glob
 from PIL import Image
+from .Backend.board_generator import test
 
 fp, tp, exp, help = st.tabs(["4-Person", "2-Person", "Expansion", "Help"])
 
