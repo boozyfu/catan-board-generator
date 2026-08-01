@@ -74,8 +74,8 @@ def render_board(board, images, tile_size=120):
     canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 0))
 
     # tweak these if needed
-    x_offset = 6
-    y_offset = 6
+    x_offset = 4
+    y_offset = 5
 
     for r, row in enumerate(board):
         offset = (max_cols - len(row)) * dx / 2
