@@ -4,7 +4,7 @@ import glob
 from PIL import Image
 from Backend.board_generator import fp_resources, tp_resources, generate_board, render_board
 
-tile_size = 60
+tile_size = 120
 fp, tp, exp, help = st.tabs(["4-Person", "2-Person", "Expansion", "Help"])
 
 @st.cache_data
