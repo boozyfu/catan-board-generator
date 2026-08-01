@@ -18,4 +18,5 @@ with fp:
     with st.bottom:
       generate_btn = st.button("Generate Board")
     if generate_btn:
-      create_catan_board(fp_resources)
+      game_board = create_catan_board(fp_resources)
+      st.image(game_board)
