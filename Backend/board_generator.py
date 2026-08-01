@@ -1,16 +1,10 @@
 import random
-from PIL import Image
+from PIL import Image, ImageDraw
 import math
 import streamlit as st
 #initialize
 row_lengths = [3, 4, 5, 4, 3]
 
-if "image_files" not in st.session_state:
-  img_files = glob.glob("./Images/*.png")
-  st.session_state.image_files = img_files
-
-if "img_stem" not in st.session_state:
-  st.session_state.img_stem = [f.split("/")[-1] for f in st.session_state.image_files]
 
 fp_resources = {
   "wood": 4,
@@ -42,7 +36,7 @@ def generate_board(resource_dict):
     return board
 
 @st.cache_data
-def load_board_images(tile_size=40):
+def load_board_images(tile_size=120):
     images = {}
     # Convert list to tuple for hashability
     image_files = tuple(st.session_state.get("image_files", []))
@@ -57,31 +51,84 @@ def load_board_images(tile_size=40):
         )
     return images
 
-def display_board(resource_dict):
-  board_image_lookup = load_board_images()
-  st.write(board_image_lookup.keys())
-  board = generate_board(resource_dict)
-  
-  tile_size = 40
-  
-  # Calculate canvas size
-  # For hexagonal grids with offset rows
-  max_width = max(len(row) for row in board)
-  canvas_width = max_width * tile_size + tile_size // 2
-  canvas_height = len(board) * tile_size + tile_size // 2
-  
-  # Create blank image
-  board_image = Image.new('RGBA', (canvas_width, canvas_height), (255, 255, 255, 0))
-  
-  # Paste tiles
-  for row_num, row in enumerate(board):
-    for col_num, resource in enumerate(row):
-      # Calculate x position with offset for alternating rows
-      offset_x = (tile_size // 2) if row_num % 2 == 1 else 0
-      x = col_num * tile_size + offset_x + (tile_size // 4)
-      y = row_num * tile_size + (tile_size // 4)
-      
-      tile_img = board_image_lookup[resource]
-      board_image.paste(tile_img, (int(x), int(y)), tile_img)
-  
-  st.image(board_image)
+
+def create_catan_board(resource_dict, tile_size=150):
+    """
+    Create a Catan-style board from a list of PIL images.
+
+    Args:
+   ge] - terrain images
+        tile_size: width/height of each hex tile
+
+    Returns:
+        PIL.Image.Image containing the assembled board
+    """
+  static_images = load_board_images()
+
+  image_board = generate_board(resource_dict)
+
+  images = [static_images.get(img) for row in image_board for img in row]
+
+    def hex_mask(size):
+        """Create a flat-top hexagon mask."""
+        mask = Image.new("L", (size, size), 0)
+        draw = ImageDraw.Draw(mask)
+
+        points = [
+            (size * 0.25, 0),
+            (size * 0.75, 0),
+            (size, size * 0.5),
+            (size * 0.75, size),
+            (size * 0.25, size),
+            (0, size * 0.5),
+        ]
+
+        draw.polygon(points, fill=255)
+        return mask
+
+    def make_hex(image):
+        """Resize image and crop into a hex."""
+        image = image.convert("RGB")
+        image = image.resize((tile_size, tile_size))
+
+        hex_img = Image.new("RGBA", (tile_size, tile_size))
+        mask = hex_mask(tile_size)
+
+        hex_img.paste(image, (0, 0), mask)
+        return hex_img
+
+    rows = [3, 4, 5, 4, 3]
+
+    hexes = [make_hex(img) for img in images]
+
+    # spacing for flat-top hexes
+    dx = tile_size * 0.75
+    dy = tile_size * 0.86
+
+    board_width = int(dx * 5 + tile_size)
+    board_height = int(dy * 5 + tile_size)
+
+    board = Image.new(
+        "RGBA",
+        (board_width, board_height),
+        (255, 255, 255, 0)
+    )
+
+    index = 0
+
+    for row, count in enumerate(rows):
+        # center shorter rows
+        x_offset = (5 - count) * dx / 2
+
+        for col in range(count):
+            x = int(x_offset + col * dx)
+            y = int(row * dy)
+
+            board.alpha_composite(
+                hexes[index],
+                (x, y)
+            )
+
+            index += 1
+
+    return board
