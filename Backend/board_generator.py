@@ -81,9 +81,10 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
 
     hex_list = [img for row in image_board for img in row]
 
+    desert_idx = hex_list.index("desert")
+    num_list.insert(desert_idx, None)
     hexes = [static_images.get(img) for img in hex_list]
-    number_tiles = [num_list[idx] for idx, label in enumerate(hex_list) 
-                    if label != "desert"]
+    number_tiles = [num_list[idx] for idx, _ in enumerate(hex_list)]
     
     rows = [3, 4, 5, 4, 3]
 
