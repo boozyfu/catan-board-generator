@@ -54,7 +54,7 @@ def load_board_images(tile_size=120):
             Image.open(file)
             .convert("RGBA")
             .resize((tile_size, tile_size))
-            .rotate(30, expand=True)
+            .rotate(30, expand=False)
         )
     return images
 
