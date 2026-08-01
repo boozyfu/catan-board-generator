@@ -40,7 +40,7 @@ def get_hex_spacing(size):
     dy = size * math.sin(math.pi / 3)              # ≈ 0.866 * size
     return dx, dy
 
-def render_board(board, images, tile_size=TILE_SIZE):
+def render_board(board, images, tile_size=120):
     """Render the Catan board with proper hexagonal grid math"""
     dx, dy = get_hex_spacing(tile_size)
     
