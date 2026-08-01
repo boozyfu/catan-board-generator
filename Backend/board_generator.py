@@ -58,7 +58,7 @@ def load_board_images(tile_size=120):
         )
     return images
 
-def display_grid(board, images, row_lengths):
+def display_grid(board, images):
     max_cols = max(row_lengths)
 
     for row, row_len in zip(board, layout):
