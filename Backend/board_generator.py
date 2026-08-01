@@ -66,7 +66,7 @@ def create_catan_board(resource_dict, tile_size=150):
 
     image_board = generate_board(resource_dict)
 
-    images = [static_images.get(img) for row in image_board for img in row]
+    hexes = [static_images.get(img) for row in image_board for img in row]
 
     def hex_mask(size):
         """Create a flat-top hexagon mask."""
@@ -93,7 +93,7 @@ def create_catan_board(resource_dict, tile_size=150):
 
     rows = [3, 4, 5, 4, 3]
 
-    hexes = [make_hex(img) for img in images]
+    #hexes = [make_hex(img) for img in images]
 
     # spacing for flat-top hexes
     dx = tile_size * 0.75
