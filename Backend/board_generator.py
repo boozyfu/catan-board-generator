@@ -73,15 +73,19 @@ def render_board(board, images, tile_size=120):
 
     canvas = Image.new("RGBA", (canvas_w, canvas_h), (255, 255, 255, 0))
 
-    for r, row in enumerate(board):
-        offset = (max_cols - len(row)) * dx / 2
+    X_OFFSET = 6
+Y_OFFSET = 6
 
-        for c, resource in enumerate(row):
-            img = images[resource]
+for r, row in enumerate(board):
+    offset = (max_cols - len(row)) * dx / 2
 
-            x = int(margin + offset + c * dx - img.width / 2)
-            y = int(margin + r * dy - img.height / 2)
+    for c, resource in enumerate(row):
+        img = images[resource]
 
-            canvas.alpha_composite(img, (x, y))
+        x = int(margin + offset + c * dx - tile_size / 2 + X_OFFSET)
+        y = int(margin + r * dy - tile_size / 2 + Y_OFFSET)
+
+        canvas.alpha_composite(img, (x, y))
+
 
     return canvas
