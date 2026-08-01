@@ -3,14 +3,17 @@ import random
 import glob
 from PIL import Image
 
-tp, fp, exp, help = st.tabs(["2-Person", "4-Person", "Expansion", "Help"])
+fp, tp, exp, help = st.tabs(["4-Person", "2-Person", "Expansion", "Help"])
 
 @st.cache_data
 def load_board_images():
+  TILE_SIZE = 120  
   img_dict = {}
+  
   for file in st.session_state["image_files"]:
     file_base = file.split("/")[-1]
-    img_load = Image.open(file)
+    img_load = Image.open(file).convert("RGBA")
+    img_load = img_load.resize((TILE_SIZE, TILE_SIZE))
     img_dict[file_base] = img_load
 
   return img_dict
@@ -26,7 +29,8 @@ if "board_images" not in st.session_state:
   st.session_state.board_images = load_board_images()
 
 
-with tp:
+
+with fp:
   game_container = st.container()
   with game_container:
     st.header("Catan Board Generator - 2 Player")
