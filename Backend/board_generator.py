@@ -21,7 +21,8 @@ tp_resources = {
   "ore": 2,
   "desert": 1}
 
-
+if "board_images" not in st.session_state:
+  st.session_state.board_images = load_board_images()
 
 def generate_board(resource_dict):
     tiles = []
