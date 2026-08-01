@@ -67,32 +67,7 @@ def create_catan_board(resource_dict, tile_size=150):
 
     hexes = [static_images.get(img) for row in image_board for img in row]
 
-    def hex_mask(size):
-        """Create a flat-top hexagon mask."""
-        mask = Image.new("L", (size, size), 0)
-        draw = ImageDraw.Draw(mask)
-
-        points = [
-            (size * 0.25, 0),
-            (size * 0.75, 0),
-            (size, size * 0.5),
-            (size * 0.75, size),
-            (size * 0.25, size),
-            (0, size * 0.5),
-        ]
-
-        draw.polygon(points, fill=255)
-        return mask
-
-    def make_hex(image):
-        """Resize image and crop into a hex."""
-        image = image.convert("RGB")
-        image = image.resize((tile_size, tile_size))
-        return image
-
     rows = [3, 4, 5, 4, 3]
-
-    #hexes = [make_hex(img) for img in images]
 
     # spacing for flat-top hexes
     dx = tile_size * 0.75
@@ -111,11 +86,11 @@ def create_catan_board(resource_dict, tile_size=150):
 
     for row, count in enumerate(rows):
         # center shorter rows
-        x_offset = (5 - count) * dx / 2
+        y_ffset = (5 - count) * dy / 2
 
         for col in range(count):
-            x = int(x_offset + col * dx)
-            y = int(row * dy)
+            y = int(col * dx)
+            x = int(y_offset + row * dy)
 
             board.alpha_composite(
                 hexes[index],
