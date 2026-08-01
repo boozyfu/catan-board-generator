@@ -29,6 +29,19 @@ CATAN_COORDS = [
     ( 4,  2), ( 4,  0), ( 4, -2),
 ]
 
+def generate_board(resource_dict):
+    tiles = []
+    for resource, count in resource_dict.items():
+        tiles.extend([resource] * count)
+    random.shuffle(tiles)
+
+    board = []
+    i = 0
+    for row_len in ROW_LENGTHS:
+        board.append(tiles[i : i + row_len])
+        i += row_len
+    return board
+
 @st.cache_data
 def load_board_images(tile_size=120):
     images = {}
