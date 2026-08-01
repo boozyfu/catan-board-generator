@@ -58,22 +58,22 @@ def load_board_images(tile_size=120):
         )
     return images
 
-def display_grid(board, images):
-    """
-    board: 2D list of resource names from generate_board()
-    images: dictionary from load_board_images()
-    layout: row sizes e.g. [3,4,5,4,3]
-    """
+def display_grid(board, images, row_lengths):
+    max_cols = max(row_lengths)
 
-    for row, columns_in_row in zip(board, row_lengths):
-        cols = st.columns(columns_in_row)
+    for row, row_len in zip(board, layout):
+        # calculate padding needed on each side
+        padding = (max_cols - row_len) // 2
 
-        for col, resource in zip(cols, row):
-            with col:
-                if resource in images:
-                    st.image(
-                        images[resource],
-                        use_container_width=True
-                    )
-                else:
-                    st.write(resource)
+        # create full row with empty spaces
+        cols = st.columns([1] * max_cols)
+
+        start = padding
+        end = padding + row_len
+
+        for i, resource in enumerate(row):
+            with cols[start + i]:
+                st.image(
+                    images[resource],
+                    use_container_width=True
+                )
