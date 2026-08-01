@@ -75,5 +75,5 @@ def display_grid(board, images):
             with cols[start + i]:
                 st.image(
                     images[resource],
-                    use_container_width=True
+                    use_container_width=False
                 )
