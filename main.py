@@ -1,7 +1,7 @@
 import streamlit as st
 import random
 
-main, help = st.tabs["Main", "Help"]
+main, help = st.tabs(["Main", "Help"])
 
 with main:
   game_container = st.container()
