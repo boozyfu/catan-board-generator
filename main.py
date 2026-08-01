@@ -7,6 +7,10 @@ from Backend.board_generator import fp_resources, tp_resources, create_catan_boa
 tile_size = 120
 fp, tp, exp, help = st.tabs(["4-Person", "2-Person", "Expansion", "Help"])
 
+if "image_files" not in st.session_state:
+  st.session_state["image_files"] = glob.glob("./Images/*.png")
+
+
 with fp:
   st.header("Catan Board Generator - 4 Player")
   game_container = st.container()
