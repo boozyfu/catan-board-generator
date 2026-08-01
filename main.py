@@ -18,8 +18,7 @@ def load_board_images():
   for file in st.session_state["image_files"]:
     st.write(file)
     file_base = file.split("/")[-1]
-    with open(file, "r") as img_in:
-      img_load = Image.open(img_in)
+    img_load = Image.open(file)
     img_dict[file_base] = img_load
 
   return img_dict
