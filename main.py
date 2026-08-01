@@ -30,7 +30,7 @@ with tp:
     st.header("Catan Board Generator - 2 Player")
     generate_btn = st.button("Generate Board")
     if generate_btn:
-      options = st.session_syate.img_stem
+      options = st.session_state.img_stem
       choice = random.choice(options)
       st.image(board_images[choice])
       
