@@ -58,15 +58,16 @@ def generate_board(resource_dict):
         i += row_len
     return board
 
-def create_composite_image(image_list, coordinates=CATAN_COORDS, canvas_size=(800, 600)):
+def create_composite_image(resource_dict, coordinates=CATAN_COORDS, canvas_size=(800, 600)):
     """
     Place images at specified coordinates on a canvas.
     coordinates: list of (x, y) tuples representing center positions
     """
     # Create blank canvas
     canvas = Image.new('RGB', canvas_size, color='white')
-    
-    for img, (x, y) in zip([item[1] for item in image_list.items()], coordinates):
+    board = generate_board(resource_dict)
+  
+    for img, (x, y) in zip([board, coordinates):
         
         # Calculate top-left position (center the image at x, y)
         left = x - img.width // 2
