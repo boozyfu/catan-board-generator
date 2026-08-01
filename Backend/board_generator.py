@@ -5,6 +5,13 @@ import streamlit as st
 #initialize
 row_lengths = [3, 4, 5, 4, 3]
 
+if "image_files" not in st.session_state:
+  img_files = glob.glob("./Images/*.png")
+  st.session_state.image_files = img_files
+
+if "img_stem" not in st.session_state:
+  st.session_state.img_stem = [f.split("/")[-1] for f in st.session_state.image_files]
+
 fp_resources = {
   "wood": 4,
   "clay": 3,
