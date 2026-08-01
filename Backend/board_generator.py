@@ -88,9 +88,9 @@ def create_catan_board(resource_dict, tile_size=150):
         # center shorter rows
         y_offset = abs(2-col) * (dy / 2)
 
-        for col in range(count):
+        for row in range(count):
             x = int(col * dx)
-            y = int(col * dy + y_offset)
+            y = int(row * dy + y_offset)
 
             board.alpha_composite(
                 hexes[index],
