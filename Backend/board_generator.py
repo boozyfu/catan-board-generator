@@ -7,7 +7,7 @@ fp_resources = {
   "wood": 4,
   "brick": 3,
   "sheep": 4,
-  "wheat": 4,
+  "grain": 4,
   "ore": 3,
   "desert": 1}
 
@@ -15,7 +15,7 @@ tp_resources = {
   "wood": 3,
   "brick": 2,
   "sheep": 3,
-  "wheat": 3,
+  "grain": 3,
   "ore": 2,
   "desert": 1}
 
