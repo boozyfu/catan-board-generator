@@ -43,7 +43,7 @@ def generate_board(resource_dict):
     return board
 
 @st.cache_data
-def load_board_images(tile_size=120):
+def load_board_images(tile_size=40):
     images = {}
     # Convert list to tuple for hashability
     image_files = tuple(st.session_state.get("image_files", []))
