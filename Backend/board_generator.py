@@ -37,7 +37,7 @@ def generate_board(resource_dict):
 
     board = []
     i = 0
-    for row_len in ROW_LENGTHS:
+    for row_len in row_lenghts:
         board.append(tiles[i : i + row_len])
         i += row_len
     return board
