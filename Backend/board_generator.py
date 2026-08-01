@@ -66,7 +66,7 @@ def create_composite_image(image_list, coordinates=CATAN_COORDS, canvas_size=(80
     # Create blank canvas
     canvas = Image.new('RGB', canvas_size, color='white')
     
-    for img, (x, y) in zip(image_list, coordinates):
+    for img, (x, y) in zip([item[1] for item in image_list], coordinates):
         
         # Calculate top-left position (center the image at x, y)
         left = x - img.width // 2
