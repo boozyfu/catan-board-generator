@@ -86,7 +86,7 @@ def create_catan_board(resource_dict, tile_size=150):
 
     for row, count in enumerate(rows):
         # center shorter rows
-        y_ffset = (5 - count) * dy / 2
+        y_offset = (5 - count) * dy / 2
 
         for col in range(count):
             y = int(col * dx)
