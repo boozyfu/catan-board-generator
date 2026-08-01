@@ -60,5 +60,5 @@ def display_board(resource_dict):
       cols = st.columns(num_cols)
       for col in cols:
           with col:
-              st.image(board_image_lookup[board[image_idx], use_container_width=True)
+              st.image(board_image_lookup[board[image_idx]], use_container_width=True)
           image_idx += 1
