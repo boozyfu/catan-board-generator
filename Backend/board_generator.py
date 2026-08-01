@@ -58,7 +58,7 @@ def generate_board(resource_dict):
         i += row_len
     return board
 
-def create_composite_image(image_list, coordinates, canvas_size=(800, 600)):
+def create_composite_image(image_list, coordinates=CATAN_COORDS, canvas_size=(800, 600)):
     """
     Place images at specified coordinates on a canvas.
     coordinates: list of (x, y) tuples representing center positions
