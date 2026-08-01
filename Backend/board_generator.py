@@ -2,8 +2,8 @@ import random
 from PIL import Image
 import math
 import streamlit as st
-#initialize board
-ROW_LENGTHS = [3, 4, 5, 4, 3]
+#initialize
+row_lengths = [3, 4, 5, 4, 3]
 
 fp_resources = {
   "wood": 4,
@@ -58,21 +58,22 @@ def load_board_images(tile_size=120):
         )
     return images
 
-def create_composite_image(resource_dict, coordinates=CATAN_COORDS, canvas_size=(200, 100)):
-    """Place images at specified coordinates on a canvas."""
-    canvas = Image.new('RGB', canvas_size, color='white')
-    board = generate_board(resource_dict)
-    
-    board_images = load_board_images()
-    
-    # Flatten the board and zip with coordinates
-    flat_board = [tile for row in board for tile in row]
-    
-    for tile, (x, y) in zip(flat_board, coordinates):
-        img = board_images.get(tile)
-        if img:  # Check if image exists
-            left = x - img.width // 2
-            top = y - img.height // 2
-            canvas.paste(img, (left, top), img)  # Use alpha channel for transparency
-    
-    return canvas
+def display_grid(board, images):
+    """
+    board: 2D list of resource names from generate_board()
+    images: dictionary from load_board_images()
+    layout: row sizes e.g. [3,4,5,4,3]
+    """
+
+    for row, columns_in_row in zip(board, row_lengths):
+        cols = st.columns(columns_in_row)
+
+        for col, resource in zip(cols, row):
+            with col:
+                if resource in images:
+                    st.image(
+                        images[resource],
+                        use_container_width=True
+                    )
+                else:
+                    st.write(resource)
