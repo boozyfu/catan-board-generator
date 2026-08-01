@@ -2,7 +2,7 @@ import streamlit as st
 import random
 import glob
 from PIL import Image
-from Backend.board_generator import fp_resources, tp_resources, load_board_images, display_grid 
+from Backend.board_generator import fp_resources, tp_resources, load_board_images, generate_board, display_grid 
 
 tile_size = 120
 fp, tp, exp, help = st.tabs(["4-Person", "2-Person", "Expansion", "Help"])
