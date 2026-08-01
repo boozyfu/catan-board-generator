@@ -28,7 +28,6 @@ def generate_numbers(game_type):
                      "tp": tp_numbers}
   st.write(game_type)
   num_list = num_list_lookup[game_type]
-  st.write(num_list)
   
   shuffle = random.shuffle(num_list)
   st.write(shuffle)
