@@ -29,7 +29,7 @@ if "img_stem" not in st.session_state:
 if "board_images" not in st.session_state:
   st.session_state.board_images = load_board_images()
 
-
+st.write(st.session_state.board_images.keys()
 
 with fp:
   st.header("Catan Board Generator - 4 Player")
