@@ -50,7 +50,7 @@ def render_board(board, images, TILE_SIZE=120):
 
     return canvas
 """
-def render_board(board, images, tile_size=TILE_SIZE):
+def render_board(board, images, tile_size=120):
     """Render the Catan board with hex tiles"""
     hex_w = tile_size
     hex_h = int(tile_size * 0.87)
