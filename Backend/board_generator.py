@@ -61,7 +61,7 @@ def load_board_images(tile_size=120):
 def display_grid(board, images):
     max_cols = max(row_lengths)
 
-    for row, row_len in zip(board, row_lenghts):
+    for row, row_len in zip(board, row_lengths):
         # calculate padding needed on each side
         padding = (max_cols - row_len) // 2
 
