@@ -4,7 +4,8 @@ import math
 import streamlit as st
 #initialize
 row_lengths = [3, 4, 5, 4, 3]
-
+tp_numbers = []
+fp_numbers = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12]
 
 fp_resources = {
   "wood": 4,
@@ -21,6 +22,15 @@ tp_resources = {
   "grain": 3,
   "ore": 2,
   "desert": 1}
+
+def generate_numbers(game_type):
+  num_list_lookup = {"fp": fp_numbers,
+                     "tp": tp_numbers}
+  num_list = num_list_lookup.get(game_type)
+  
+  shuffle = random.shuffle(num_list)
+
+  return shuffle
 
 def generate_board(resource_dict):
     tiles = []
@@ -50,7 +60,7 @@ def load_board_images(tile_size=120):
     return images
 
 
-def create_catan_board(resource_dict, tile_size=150):
+def create_catan_board(resource_dict, game_type, tile_size=150):
     """
     Create a Catan-style board from a list of PIL images.
 
@@ -65,8 +75,14 @@ def create_catan_board(resource_dict, tile_size=150):
 
     image_board = generate_board(resource_dict)
 
-    hexes = [static_images.get(img) for row in image_board for img in row]
+    num_list = generate_numbers(game_type)
 
+    hex_list = [img for row in image_board for image in row]
+
+    hexes = [static_images.get(img) img in hex_list]
+    number_tiles = [num_list[idx] for idx, label in enumerate(hex_list) 
+                    if label != "desert"]
+    
     rows = [3, 4, 5, 4, 3]
 
     # spacing for flat-top hexes
@@ -82,6 +98,8 @@ def create_catan_board(resource_dict, tile_size=150):
         (255, 255, 255, 0)
     )
 
+    draw = ImageDraw.draw(board)
+
     index = 0
 
     for col, count in enumerate(rows):
@@ -96,7 +114,31 @@ def create_catan_board(resource_dict, tile_size=150):
                 hexes[index],
                 (x, y)
             )
+            number = number_tiles[index]
+            cx = x + tile_size // 2
+            cy = y + tile_size // 2
+            r = tile_size // 7
+            draw.ellipse(
+                (cx-r, cy-r, cx+r, cy+r),
+                fill="white",
+                outline="black",
+                width=2)
 
+            
+            color = "red" if number in (6, 8) else "black"
+
+            text = str(number)
+            bbox = draw.textbbox((0, 0), text, font=font)
+            tw = bbox[2] - bbox[0]
+            th = bbox[3] - bbox[1]
+
+            draw.text(
+                (cx - tw/2, cy - th/2),
+                text,
+                fill=color,
+                font=font,
+            )
+        
             index += 1
 
     return board
