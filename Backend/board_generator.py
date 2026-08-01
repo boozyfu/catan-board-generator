@@ -50,11 +50,9 @@ def load_board_images(tile_size=40):
         )
     return images
 
-if "board_images" not in st.session_state:
-  st.session_state.board_images = load_board_images()
-
 def display_board(resource_dict):
   board_image_lookup = load_board_images()
+  st.write(board_image_lookup.keys())
   board = generate_board(resource_dict)
   
   tile_size = 40
