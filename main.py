@@ -5,13 +5,6 @@ from PIL import Image
 
 tp, fp, exp, help = st.tabs(["2-Person", "4-Person", "Expansion", "Help"])
 
-if "image_files" not in st.session_state:
-  img_files = glob.glob("./Images/*.png")
-  st.session_state.image_files = img_files
-
-if "img_stem" not in st.session_state:
-  st.session_state.img_stem = [f.split("/")[-1] for f in st.session_state.image_files]
-
 @st.cache_data
 def load_board_images():
   img_dict = {}
@@ -22,7 +15,16 @@ def load_board_images():
 
   return img_dict
 
-board_images = load_board_images()
+if "image_files" not in st.session_state:
+  img_files = glob.glob("./Images/*.png")
+  st.session_state.image_files = img_files
+
+if "img_stem" not in st.session_state:
+  st.session_state.img_stem = [f.split("/")[-1] for f in st.session_state.image_files]
+
+if "board_images" not in st.session_state:
+  st.session_state.board_images = load_board_images()
+
 
 with tp:
   game_container = st.container()
@@ -32,5 +34,5 @@ with tp:
     if generate_btn:
       options = st.session_state.img_stem
       choice = random.choice(options)
-      st.image(board_images[choice])
+      st.image(st.session_state.board_images[choice])
       
