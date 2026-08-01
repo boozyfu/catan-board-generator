@@ -1,3 +1,4 @@
+import random
 #initialize board
 ROW_LENGTHS = [3, 4, 5, 4, 3]
 
