@@ -42,6 +42,7 @@ with fp:
       generate_btn = st.button("Generate Board")
     if generate_btn:
       board = generate_board(fp_resources)
-      board_render = render_board(board, st.session_state.board_images, tile_size=tile_size)
+      resources = [tile for row in board for tile in row]
+      board_render = render_board(resources, images, tile_size=120)
       st.image(board_render)
       
