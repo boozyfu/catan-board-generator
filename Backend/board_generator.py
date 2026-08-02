@@ -120,8 +120,9 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
                 (x, y)
             )
             number = number_tiles[index]
-            cx = x + tile_size // 2
-            cy = y + tile_size // 2
+            offset = 10
+            cx = (x + tile_size // 2) + offset
+            cy = (y + tile_size // 2) + offset
             r = tile_size // 7
             draw.ellipse(
                 (cx-r, cy-r, cx+r, cy+r),
@@ -133,7 +134,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
             color = "red" if number in (6, 8) else "black"
 
             text = str(number)
-            bbox = draw.textbbox((-10,23), text)
+            bbox = draw.textbbox((0,0), text)
             tw = bbox[2] - bbox[0]
             th = bbox[3] - bbox[1]
 
