@@ -1,4 +1,5 @@
 import random
+import PIL
 from PIL import Image, ImageDraw, ImageFont
 import math
 import streamlit as st
