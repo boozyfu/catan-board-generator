@@ -95,7 +95,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
     dy = tile_size * 0.9
 
     board_width = int(dx * 5)
-    board_height = int(dy * 5 + y_offset)
+    board_height = int(dy * 5)
 
     board = Image.new(
         "RGBA",
@@ -112,8 +112,8 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
         y_offset = abs(2-col) * (dy / 2)
 
         for row in range(count):
-            x = int(col * tile_size)
-            y = int(row * tile_size + y_offset)
+            x = int(col * dx)
+            y = int(row * dy + y_offset)
 
             board.alpha_composite(
                 hexes[index],
