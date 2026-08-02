@@ -2,6 +2,7 @@ import random
 from PIL import Image, ImageDraw
 import math
 import streamlit as st
+from io import BytesIO
 import base64
 #initialize
 row_lengths = [3, 4, 5, 4, 3]
@@ -148,7 +149,10 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
 
 def render_image(image):
   # Define the HTML hyperlink with the image
-  img_b64 = base64.b64encode(image).decode()
+  buffer = BytesIO()
+    image.save(buffer, format="PNG")
+    buffer.seek(0)
+  img_b64 = base64.b64encode(buffer.getvalue()).decode()
   html = f"""
   <div style="text-align: center;">
     <img src="data:image/png;base64,{img_b64}" 
