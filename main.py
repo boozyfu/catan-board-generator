@@ -10,6 +10,12 @@ fp, tp, exp, help = st.tabs(["4-Person", "2-Person", "Expansion", "Help"])
 if "image_files" not in st.session_state:
   st.session_state["image_files"] = glob.glob("./Images/*.png")
 
+st.markdown(
+    """
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
+    """,
+    unsafe_allow_html=True
+)
 
 with fp:
   st.header("Catan Board Generator - 4 Player")
