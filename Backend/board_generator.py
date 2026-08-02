@@ -94,8 +94,8 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
     dx = tile_size * 0.65
     dy = tile_size * 0.8
 
-    board_width = int(dx * 6)
-    board_height = int(dy * 6)
+    board_width = int(dx * 5.25)
+    board_height = int(dy * 5.25)
 
     board = Image.new(
         "RGBA",
