@@ -53,16 +53,7 @@ def load_board_images(tile_size=120):
 
 
 def create_catan_board(resource_dict, game_type, tile_size=150):
-    """
-    Create a Catan-style board from a list of PIL images.
 
-    Args:
-   ge] - terrain images
-        tile_size: width/height of each hex tile
-
-    Returns:
-        PIL.Image.Image containing the assembled board
-    """
     tp_numbers = ["2-12", 3, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 11]
     fp_numbers = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12]
     
@@ -131,11 +122,9 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
                   fill="white",
                   outline="black",
                   width=2)
-
             
               color = "red" if number in (6, 8) else "black"
-            
-
+          
               text = str(number)
               bbox = draw.textbbox((0,0), text)
               tw = bbox[2] - bbox[0]
