@@ -62,7 +62,8 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
     """
     tp_numbers = []
     fp_numbers = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12]
-    font = ImageFont.truetype("DejaVuSans.ttf", size=40)
+    font_path = PIL.__path__[0] + "/fonts/DejaVuSans-Bold.ttf"
+    font = ImageFont.truetype(font_path, 40)
     def generate_numbers(game_type):
         num_list_lookup = {"fp": fp_numbers,
                      "tp": tp_numbers}
