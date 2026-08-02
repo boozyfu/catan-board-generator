@@ -112,7 +112,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
         y_offset = abs(2-col) * (dy / 2)
 
         for row in range(count):
-            x = int(col * dx)
+            x = int(col * dx) + 25
             y = int(row * dy + y_offset)
 
             board.alpha_composite(
@@ -156,9 +156,9 @@ def render_image(image):
     html = f"""
     <div style="text-align: center;">
       <img src="data:image/png;base64,{img_b64}" 
-           width="500" 
+           width="750" 
            style="border: 2px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-      <p style="margin-top: 10px; color: gray;">Image Caption</p>
+      <p style="margin-top: 10px; color: gray;"></p>
     </div>
     """
     st.markdown(html, unsafe_allow_html=True)
