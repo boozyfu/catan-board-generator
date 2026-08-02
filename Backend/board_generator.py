@@ -92,7 +92,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
 
     # spacing for flat-top hexes
     dx = tile_size * 0.7
-    dy = tile_size * 0.9
+    dy = tile_size * 0.8
 
     board_width = int(dx * 5)
     board_height = int(dy * 5)
