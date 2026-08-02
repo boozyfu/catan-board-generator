@@ -19,13 +19,13 @@ with fp:
     unsafe_allow_html=True
 )
   st.header("Catan Board Generator - 4 Player")
-  game_container = st.container()
-  with game_container:
+  game_container_fp = st.container()
+  with game_container_fp:
     with st.bottom:
-      generate_btn = st.button("Generate Board")
-    if generate_btn:
-      game_board = create_catan_board(fp_resources, "fp")
-      render_image(game_board)
+      generate_btn_fp = st.button("Generate Board")
+    if generate_btn_fp:
+      game_board_fp = create_catan_board(fp_resources, "fp")
+      render_image(game_board_fp)
 
 with tp:
   st.markdown(
@@ -35,13 +35,13 @@ with tp:
     unsafe_allow_html=True
 )
   st.header("Catan Board Generator - 2 Player")
-  game_container = st.container()
-  with game_container:
+  game_container_tp = st.container()
+  with game_container_tp:
     with st.bottom:
-      generate_btn = st.button("Generate Board")
-    if generate_btn:
-      game_board = create_catan_board(tp_resources, "tp")
-      render_image(game_board)
+      generate_btn_tp = st.button("Generate Board")
+    if generate_btn_tp:
+      game_board_tp = create_catan_board(tp_resources, "tp")
+      render_image(game_board_tp)
 
 
   
