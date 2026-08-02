@@ -112,8 +112,8 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
         y_offset = abs(2-col) * (dy / 2)
 
         for row in range(count):
-            x = int(col * dx) + 25
-            y = int(row * dy + y_offset)
+            x = int(col * tile_size)
+            y = int(row * tile_size + y_offset)
 
             board.alpha_composite(
                 hexes[index],
