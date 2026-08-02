@@ -122,7 +122,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
             number = number_tiles[index]
             cx = x + tile_size // 2
             cy = y + tile_size // 2
-            r = tile_size // 6.5
+            r = tile_size // 5
             draw.ellipse(
                 (cx-r, cy-r, cx+r, cy+r),
                 fill="white",
