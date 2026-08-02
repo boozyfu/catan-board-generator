@@ -1,6 +1,5 @@
 import random
-import PIL
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 import math
 import streamlit as st
 #initialize
