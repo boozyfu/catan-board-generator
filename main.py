@@ -5,7 +5,7 @@ from PIL import Image
 from Backend.board_generator import fp_resources, tp_resources, create_catan_board, render_image
 
 tile_size = 120
-fp, tp, exp, help = st.tabs(["4-Person", "2-Person", "Expansion", "Help"])
+fp, tp, = st.tabs(["4-Person", "2-Person"])
 
 if "image_files" not in st.session_state:
   st.session_state["image_files"] = glob.glob("./Images/*.png")
