@@ -148,20 +148,20 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
     return board
 
 def render_image(image):
-  # Define the HTML hyperlink with the image
-  buffer = BytesIO()
+    # Define the HTML hyperlink with the image
+    buffer = BytesIO()
     image.save(buffer, format="PNG")
     buffer.seek(0)
-  img_b64 = base64.b64encode(buffer.getvalue()).decode()
-  html = f"""
-  <div style="text-align: center;">
-    <img src="data:image/png;base64,{img_b64}" 
-         width="500" 
-         style="border: 2px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    <p style="margin-top: 10px; color: gray;">Image Caption</p>
-  </div>
-  """
-  st.markdown(html, unsafe_allow_html=True)
+    img_b64 = base64.b64encode(buffer.getvalue()).decode()
+    html = f"""
+    <div style="text-align: center;">
+      <img src="data:image/png;base64,{img_b64}" 
+           width="500" 
+           style="border: 2px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+      <p style="margin-top: 10px; color: gray;">Image Caption</p>
+    </div>
+    """
+    st.markdown(html, unsafe_allow_html=True)
 
 
   
