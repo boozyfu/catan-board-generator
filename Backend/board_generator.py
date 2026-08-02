@@ -20,7 +20,8 @@ tp_resources = {
   "wool": 3,
   "grain": 3,
   "ore": 2,
-  "desert": 1}
+  "desert": 1,
+  "water": 5}
 
 
 def generate_board(resource_dict):
@@ -62,7 +63,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
     Returns:
         PIL.Image.Image containing the assembled board
     """
-    tp_numbers = []
+    tp_numbers = ["2-12", 3, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 11]
     fp_numbers = [2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12]
     
     def generate_numbers(game_type):
@@ -82,9 +83,12 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
 
     hex_list = [img for row in image_board for img in row]
 
-    desert_idx = hex_list.index("desert")
+    num_list = [None if img in ("desert", "water") 
+                else num_list.pop(0) for img in hex_list]
   
-    num_list.insert(desert_idx, None)
+    for v in water_idx:
+      num_list.insert(v, None)
+  
     hexes = [static_images.get(img) for img in hex_list]
     number_tiles = [num_list[idx] for idx, _ in enumerate(hex_list)]
     
