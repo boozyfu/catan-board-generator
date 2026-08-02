@@ -91,11 +91,11 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
     rows = [3, 4, 5, 4, 3]
 
     # spacing for flat-top hexes
-    dx = tile_size * 0.75
-    dy = tile_size * 0.86
+    dx = tile_size * 0.9
+    dy = tile_size * 0.9
 
-    board_width = int(dx * 5 + tile_size)
-    board_height = int(dy * 5 + tile_size)
+    board_width = int(dx * 5)
+    board_height = int(dy * 5 + y_offset)
 
     board = Image.new(
         "RGBA",
