@@ -133,17 +133,18 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
 
             
             color = "red" if number in (6, 8) else "black"
+            if number is not None:
 
-            text = str(number)
-            bbox = draw.textbbox((0,0), text)
-            tw = bbox[2] - bbox[0]
-            th = bbox[3] - bbox[1]
+              text = str(number)
+              bbox = draw.textbbox((0,0), text)
+              tw = bbox[2] - bbox[0]
+              th = bbox[3] - bbox[1]
 
-            draw.text(
-                (cx - tw/2, cy - th/2),
-                text,
-                fill=color
-            )
+              draw.text(
+                  (cx - tw/2, cy - th/2),
+                  text,
+                  fill=color
+              )
         
             index += 1
 
