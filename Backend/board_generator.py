@@ -156,7 +156,7 @@ def render_image(image):
     html = f"""
     <div style="text-align: center;">
       <img src="data:image/png;base64,{img_b64}" 
-           width="500" 
+           width="850" 
            style="border: 2px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
       <p style="margin-top: 10px; color: gray;"></p>
     </div>
