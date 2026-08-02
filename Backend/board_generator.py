@@ -120,7 +120,7 @@ def create_catan_board(resource_dict, game_type, tile_size=150):
                 (x, y)
             )
             number = number_tiles[index]
-            offset = 10
+            offset = 100
             cx = (x + tile_size // 2) + offset
             cy = (y + tile_size // 2) + offset
             r = tile_size // 7
