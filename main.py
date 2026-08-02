@@ -21,8 +21,7 @@ with fp:
   st.header("Catan Board Generator - 4 Player")
   game_container_fp = st.container()
   with game_container_fp:
-    with st.bottom:
-      generate_btn_fp = st.button("Generate Board", key="1")
+    generate_btn_fp = st.button("Generate Board", key="1")
     if generate_btn_fp:
       game_board_fp = create_catan_board(fp_resources, "fp")
       render_image(game_board_fp)
@@ -37,8 +36,7 @@ with tp:
   st.header("Catan Board Generator - 2 Player")
   game_container_tp = st.container()
   with game_container_tp:
-    with st.bottom:
-      generate_btn_tp = st.button("Generate Board", key="2")
+    generate_btn_tp = st.button("Generate Board", key="2")
     if generate_btn_tp:
       game_board_tp = create_catan_board(tp_resources, "tp")
       render_image(game_board_tp)
